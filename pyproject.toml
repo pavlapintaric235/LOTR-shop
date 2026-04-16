@@ -1,0 +1,12 @@
+[project]
+name = "lotr-shop"
+version = "0.1.0"
+description = "Mini LOTR webshop API"
+requires-python = ">=3.13"
+
+[tool.fastapi]
+entrypoint = "app.main:app"
+
+[tool.black]
+line-length = 88
+target-version = ["py313"]

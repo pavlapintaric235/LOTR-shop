@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOTR Shop</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div>
+                <h1>LOTR Shop</h1>
+                <p class="header-subtitle">Middle-earth inspired collectibles, clothing, and books.</p>
+            </div>
+            <div class="header-actions">
+                <span id="user-status">Not signed in</span>
+                <button id="signout-button" class="secondary-button hidden" type="button">Sign out</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container layout">
+        <section class="card auth-card">
+            <div class="auth-grid">
+                <div>
+                    <h2>Sign up</h2>
+                    <form id="signup-form" class="form-stack">
+                        <label>
+                            Email
+                            <input type="email" id="signup-email" placeholder="sam@example.com" required>
+                        </label>
+                        <label>
+                            Username
+                            <input type="text" id="signup-username" placeholder="sam" required>
+                        </label>
+                        <label>
+                            Password
+                            <input type="password" id="signup-password" placeholder="shire123" required>
+                        </label>
+                        <button type="submit">Create account</button>
+                    </form>
+                    <p id="signup-message" class="message"></p>
+                </div>
+
+                <div>
+                    <h2>Log in</h2>
+                    <form id="login-form" class="form-stack">
+                        <label>
+                            Username
+                            <input type="text" id="login-username" placeholder="sam" required>
+                        </label>
+                        <label>
+                            Password
+                            <input type="password" id="login-password" placeholder="shire123" required>
+                        </label>
+                        <button type="submit">Log in</button>
+                    </form>
+                    <p id="login-message" class="message"></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="shop-layout">
+            <aside class="card sidebar-card">
+                <h2>Browse</h2>
+                <div class="sidebar-links">
+                    <button id="filter-all-featured" class="sidebar-link active-filter" type="button">
+                        All featured
+                    </button>
+                    <button class="sidebar-link slug-filter-button" data-slug="clothes" type="button">
+                        clothes
+                    </button>
+                    <button class="sidebar-link slug-filter-button" data-slug="movie-props" type="button">
+                        movie-props
+                    </button>
+                    <button class="sidebar-link slug-filter-button" data-slug="books" type="button">
+                        books
+                    </button>
+                </div>
+            </aside>
+
+            <section class="card products-section">
+                <div class="section-header">
+                    <div>
+                        <h2 id="products-title">Featured Products</h2>
+                        <p class="section-subtitle" id="products-subtitle">Highlighted picks from the shop.</p>
+                    </div>
+                    <button id="refresh-products-button" class="secondary-button" type="button">Refresh</button>
+                </div>
+                <div id="products-grid" class="products-grid"></div>
+            </section>
+        </section>
+
+        <section class="card">
+            <div class="section-header">
+                <div>
+                    <h2>Cart</h2>
+                    <p class="section-subtitle">Adjust quantity, remove items, and checkout.</p>
+                </div>
+                <button id="refresh-cart-button" class="secondary-button" type="button">Refresh</button>
+            </div>
+            <div id="cart-items" class="cart-items"></div>
+            <div class="cart-footer">
+                <strong>Total: <span id="cart-total">€0.00</span></strong>
+                <button id="checkout-button" type="button">Checkout</button>
+            </div>
+            <p id="cart-message" class="message"></p>
+        </section>
+
+        <section class="card">
+            <div class="section-header">
+                <div>
+                    <h2>Orders</h2>
+                    <p class="section-subtitle">Review orders and complete payment for unpaid orders.</p>
+                </div>
+                <button id="refresh-orders-button" class="secondary-button" type="button">Refresh</button>
+            </div>
+            <div id="orders-list" class="orders-list"></div>
+            <p id="orders-message" class="message"></p>
+        </section>
+
+        <section id="admin-section" class="card hidden">
+            <div class="section-header">
+                <div>
+                    <h2>Admin Orders</h2>
+                    <p class="section-subtitle">Manage order lifecycle from the frontend.</p>
+                </div>
+                <button id="refresh-admin-orders-button" class="secondary-button" type="button">Refresh</button>
+            </div>
+            <div id="admin-orders-list" class="orders-list"></div>
+            <p id="admin-message" class="message"></p>
+        </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

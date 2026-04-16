@@ -1,11 +1,22 @@
-import os
+from __future__ import annotations
+
 from logging.config import fileConfig
 
-from sqlalchemy import create_engine, pool
-from sqlalchemy.engine import make_url
-
 from alembic import context
-from app.models import Base
+from sqlalchemy import engine_from_config, pool
+from sqlalchemy.engine import URL, make_url
+
+from app.core.config import settings
+from app.db.base_class import Base
+
+# Import all models so Base.metadata is fully populated before autogenerate runs.
+from app.models.cart import Cart  # noqa: F401
+from app.models.cart_item import CartItem  # noqa: F401
+from app.models.category import Category  # noqa: F401
+from app.models.order import Order  # noqa: F401
+from app.models.order_item import OrderItem  # noqa: F401
+from app.models.product import Product  # noqa: F401
+from app.models.user import User  # noqa: F401
 
 config = context.config
 
@@ -16,27 +27,29 @@ target_metadata = Base.metadata
 
 
 def get_database_url() -> str:
-    explicit_alembic_url = os.environ.get("ALEMBIC_DATABASE_URL")
-    if explicit_alembic_url:
-        return explicit_alembic_url
-    return os.environ["DATABASE_URL"]
+    return settings.database_url
 
 
 def get_sync_database_url() -> str:
     database_url = get_database_url()
-    sync_url = make_url(database_url).set(drivername="postgresql+psycopg2")
-    print("ALEMBIC DATABASE_URL =", database_url)
-    print("ALEMBIC SYNC URL =", sync_url.render_as_string(hide_password=False))
-    return sync_url.render_as_string(hide_password=False)
+    url: URL = make_url(database_url)
+
+    if url.drivername == "postgresql+asyncpg":
+        sync_url = url.set(drivername="postgresql+psycopg2")
+        return sync_url.render_as_string(hide_password=False)
+
+    return url.render_as_string(hide_password=False)
 
 
 def run_migrations_offline() -> None:
     url = get_sync_database_url()
+
     context.configure(
         url=url,
         target_metadata=target_metadata,
         literal_binds=True,
         compare_type=True,
+        compare_server_default=True,
     )
 
     with context.begin_transaction():
@@ -44,8 +57,12 @@ def run_migrations_offline() -> None:
 
 
 def run_migrations_online() -> None:
-    connectable = create_engine(
-        get_sync_database_url(),
+    configuration = config.get_section(config.config_ini_section) or {}
+    configuration["sqlalchemy.url"] = get_sync_database_url()
+
+    connectable = engine_from_config(
+        configuration,
+        prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
 
@@ -54,6 +71,7 @@ def run_migrations_online() -> None:
             connection=connection,
             target_metadata=target_metadata,
             compare_type=True,
+            compare_server_default=True,
         )
 
         with context.begin_transaction():

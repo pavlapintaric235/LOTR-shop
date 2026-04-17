@@ -1,5 +1,5 @@
-from pydantic import Field
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import Field  # type: ignore
+from pydantic_settings import BaseSettings, SettingsConfigDict  # type: ignore
 
 
 class Settings(BaseSettings):
@@ -16,7 +16,10 @@ class Settings(BaseSettings):
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
 
-    testing_routes_enabled: bool = Field(default=True, alias="TESTING_ROUTES_ENABLED")
+    testing_routes_enabled: bool = Field(
+        default=True,
+        alias="TESTING_ROUTES_ENABLED",
+    )
 
     model_config = SettingsConfigDict(
         env_file=".env",

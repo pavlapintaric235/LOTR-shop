@@ -3,8 +3,8 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING
 
-from sqlalchemy import DateTime, ForeignKey, func
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import DateTime, ForeignKey, func #type: ignore
+from sqlalchemy.orm import Mapped, mapped_column, relationship # type: ignore
 
 from app.db.base_class import Base
 

@@ -1,4 +1,4 @@
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.ext.asyncio import AsyncSession # type: ignore
 
 from app.core.errors import bad_request, not_found
 from app.core.order_status import can_transition_order_status, is_valid_order_status

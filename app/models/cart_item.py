@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from sqlalchemy import ForeignKey, UniqueConstraint
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import ForeignKey, UniqueConstraint # type: ignore
+from sqlalchemy.orm import Mapped, mapped_column, relationship # type: ignore
 
 from app.db.base_class import Base
 

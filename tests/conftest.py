@@ -1,8 +1,8 @@
 from collections.abc import Generator
 import asyncio
 
-import pytest
-from fastapi.testclient import TestClient
+import pytest # type: ignore
+from fastapi.testclient import TestClient # type: ignore
 
 from app.db.base_class import Base
 from app.db.session import get_db_session

@@ -98,7 +98,6 @@ The project combines a REST API backend with a minimal frontend that consumes th
 
 ## Screenshots
 
-> Add your own screenshots under `docs/screenshots/` and keep the filenames below so the README works immediately.
 
 ### Homepage
 <img width="1833" height="1573" alt="IMG_2604" src="https://github.com/user-attachments/assets/811e3ca5-3e0d-4ea4-816c-c635c40e4878" />

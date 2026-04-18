@@ -120,6 +120,8 @@ The project combines a REST API backend with a minimal frontend that consumes th
 
 
 ### Passed Tests
+<img width="569" height="238" alt="image" src="https://github.com/user-attachments/assets/30579326-96d8-403c-b5b1-6ef6dc53a2f7" />
+
 
 
 ---

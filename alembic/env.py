@@ -6,14 +6,7 @@ from sqlalchemy import engine_from_config, pool # type: ignore
 from app.core.config import settings
 from app.db.base_class import Base
 
-# Import all models so Alembic can detect them
-from app.models.cart import Cart
-from app.models.cart_item import CartItem
-from app.models.category import Category
-from app.models.order import Order
-from app.models.order_item import OrderItem
-from app.models.product import Product
-from app.models.user import User
+
 
 config = context.config
 

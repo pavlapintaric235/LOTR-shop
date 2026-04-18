@@ -1,4 +1,4 @@
-from pydantic import Field  # type: ignore
+from pydantic import Field, field_validator  # type: ignore
 from pydantic_settings import BaseSettings, SettingsConfigDict  # type: ignore
 
 
@@ -27,6 +27,15 @@ class Settings(BaseSettings):
         case_sensitive=False,
         extra="ignore",
     )
+
+    @field_validator("test_database_url", mode="before")
+    @classmethod
+    def empty_test_database_url_to_none(cls, value: object) -> object:
+        if value is None:
+            return None
+        if isinstance(value, str) and not value.strip():
+            return None
+        return value
 
     @property
     def is_development(self) -> bool:
